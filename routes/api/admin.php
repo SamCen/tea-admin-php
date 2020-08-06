@@ -25,6 +25,8 @@ Route::group(['prefix'=>'backend','namespace'=>'Admin'],function(){
         });
         Route::apiResource('user','User\AdminController');
         Route::apiResource('role','Role\RoleController');
+        Route::get('appUserRoleList','User\UserController@getRoles');
+        Route::apiResource('appUser','User\UserController');
         Route::get('privilege','Privilege\PrivilegeController@index');
         Route::put('updatePri/{role}','Role\RoleController@updatePri');
         Route::apiResource('category','Category\CategoryController');

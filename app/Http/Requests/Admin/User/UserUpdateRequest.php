@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests\App\User;
+namespace App\Http\Requests\Admin\User;
 
-use App\Rules\Phone;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UserStoreRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +24,8 @@ class UserStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'username'=>'required|string',
-            'password'=>'required|string',
-            'phone'=>['required',new Phone()],
-            'role'=>['required','integer',Rule::in(1,2)],
+            'password'=>'nullable|string',
+            'phone'=>'nullable|string',
         ];
     }
 }

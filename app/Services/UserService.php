@@ -25,6 +25,25 @@ class UserService
     {
         $page = !empty($params['page'])?$params['page']:1;
         $limit = !empty($params['limit'])?$params['limit']:10;
-        return User::query()->paginate($limit,['*'],'page',$page);
+        $query = User::query();
+        if(!empty($params['username'])){
+            $query->where('username','like',"%{$params['username']}%");
+        }
+        if(!empty($params['phone'])){
+            $query->where('phone','like',"%{$params['phone']}%");
+        }
+        return $query->paginate($limit,['*'],'page',$page);
     }
+
+    public function getRoles()
+    {
+        return User::APP_USER_ROLE_LIST;
+    }
+
+    public function showUser($userId)
+    {
+        return User::query()->find($userId);
+    }
+
+
 }

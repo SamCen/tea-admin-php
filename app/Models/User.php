@@ -18,9 +18,28 @@ class User  extends Authenticatable implements JWTSubject
 
     const ROLE_ADMIN = 2;
 
+
+    const APP_USER_ROLE_LIST = [
+        [
+            'name'=>'数据输入',
+            'id'=>self::ROLE_OPERATION,
+        ],
+        [
+            'name'=>'管理',
+            'id'=>self::ROLE_ADMIN,
+        ]
+    ];
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function setOpenidAttribute($value)
+    {
+        if(empty($value)){
+            $this->attributes['password'] = ' ';
+        }
     }
 
     public function setLastLoginIpAttribute($value)
