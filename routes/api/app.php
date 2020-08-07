@@ -13,7 +13,8 @@ Route::group(['prefix'=>'app','namespace'=>'App'],function(){
         Route::post('logout','AuthController@logout')->middleware('auth:user');
     });
     Route::group(['middleware'=>'auth:user'],function(){
-
+        Route::get('productSelectList','Operation\OperationRecordController@productSelectList');
+        Route::post('operationRecord','Operation\OperationRecordController@store');
     });
     Route::get('userSelectList','User\UserController@selectList');
 });

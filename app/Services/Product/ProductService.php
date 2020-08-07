@@ -83,4 +83,15 @@ class ProductService
     {
         return Product::UNIT_LIST;
     }
+
+    /**
+     * Author Cjc
+     * DateTime 2020/8/7 4:14 下午
+     * Description:产品下拉列表
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function productSelectList()
+    {
+        return Product::query()->select(['id','product_name as text','product_unit as unit'])->get();
+    }
 }
