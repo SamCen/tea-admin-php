@@ -36,4 +36,5 @@ class UserController extends Controller
     {
         return success($userService->getRoles());
     }
+
 }

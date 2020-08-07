@@ -45,5 +45,9 @@ class UserService
         return User::query()->find($userId);
     }
 
+    public function selectList()
+    {
+        return User::query()->select('username as text')->get();
+    }
 
 }

@@ -15,4 +15,5 @@ Route::group(['prefix'=>'app','namespace'=>'App'],function(){
     Route::group(['middleware'=>'auth:user'],function(){
 
     });
+    Route::get('userSelectList','User\UserController@selectList');
 });
