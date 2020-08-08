@@ -14,6 +14,7 @@ use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -90,11 +91,11 @@ class AuthController extends Controller
         if(empty($openid)){
             return error('code 已失效',400);
         }
-
+        Log::info('openid:'.$openid);
         $provider = new EloquentUserProvider($hasher, User::class);
         $user = $provider->retrieveByCredentials($credentials);
         if(!$user){
-            error('没有找到手机号对应的用户');
+            return error('没有找到手机号对应的用户');
         }
         if (! $token = Auth::guard('user')->login($user)) {
             return error('绑定失败', 400);
