@@ -8,7 +8,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\App\Auth\BindUserRequest;
 use App\Http\Requests\App\Auth\LoginRequest;
 use App\Http\Requests\App\Auth\WechatLoginRequest;
+use App\Models\User;
 use App\Services\WechatService;
+use Illuminate\Auth\EloquentUserProvider;
+use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
@@ -72,8 +75,9 @@ class AuthController extends Controller
         return success($response);
     }
 
-    public function bindUser(BindUserRequest $request)
+    public function bindUser(BindUserRequest $request,Hasher $hasher)
     {
+
         $credentials = [
             'phone'=>$request->get('phone'),
         ];
@@ -83,10 +87,15 @@ class AuthController extends Controller
         if(empty($openid)){
             return error('code 已失效',400);
         }
-        if (! $token = auth('user')->attempt($credentials)) {
-            return error('没有这个手机号',401);
+
+        $provider = new EloquentUserProvider($hasher, User::class);
+        $user = $provider->retrieveByCredentials($credentials);
+        if(!$user){
+            error('没有找到手机号对应的用户');
         }
-        $user = Auth::guard('user')->user();
+        if (! $token = $this->guard()->login($user)) {
+            return error('绑定失败', 400);
+        }
         $role = $user->role;
         $user->last_login_ip = isset($_SERVER['HTTP_X_FORWARDED_FOR'])?$_SERVER['HTTP_X_FORWARDED_FOR']:'127.0.0.1';
         $user->openid = $openid;
