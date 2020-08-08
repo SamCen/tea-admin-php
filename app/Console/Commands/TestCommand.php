@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Contract\RedisKey;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 
 class TestCommand extends Command
 {
@@ -37,9 +39,11 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        $camelCaps = 'SamCen';
-        $separator='_';
-        $res = strtolower(preg_replace('/([a-z])([A-Z])/', "$1" . $separator . "$2", $camelCaps));
-        dump($res);
+        $code = decrypt("eyJpdiI6IlZKdDFLbDJZTGsrdG1MNW4wOHFUbnc9PSIsInZhbHVlIjoiSlRyUXh5YWd3WkR3bXVENk5kdFRVbFJKVXZcL2tnejA2NHZpWm9yeDd4TzhOUHY3clptZDVCb3ZPRE12QjFFbG0iLCJtYWMiOiI0MGFmZTFhMTUzNDAwNjMxNWU0ODQxYWZjODcxZDQyMDVmZDQwMzJiOGU0ODc2ZmRmODNjNjlmNTI4ZjIyMmFlIn0=");
+
+        $key = sprintf(RedisKey::USER_WXCODE_OPENID,$code);
+        $openidCache = Cache::get($key);
+        $openid = decrypt($openidCache);
+        dump($openid);
     }
 }

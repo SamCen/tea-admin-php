@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix'=>'app','namespace'=>'App'],function(){
     Route::group(['prefix'=>'auth','namespace'=>'Auth'],function(){
         Route::post('login','AuthController@login');
+        Route::post('wechatLogin','AuthController@wechatLogin');
+        Route::post('bindUser','AuthController@bindUser');
         Route::post('logout','AuthController@logout')->middleware('auth:user');
     });
     Route::group(['middleware'=>'auth:user'],function(){

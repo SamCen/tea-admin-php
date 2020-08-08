@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin\User;
 
+use App\Rules\Phone;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserUpdateRequest extends FormRequest
 {
@@ -25,7 +27,7 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'password'=>'nullable|string',
-            'phone'=>'nullable|string',
+            'phone'=>['bail','nullable',new Phone(),Rule::unique('users')->ignore($this->user()->id),]
         ];
     }
 }
