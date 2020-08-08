@@ -87,7 +87,7 @@ class AuthController extends Controller
         ];
         $code = decrypt($request->get('code'));
         $cacheKey = sprintf(RedisKey::USER_WXCODE_OPENID,$code);
-        $openid = Cache::pull($cacheKey);
+        $openid = decrypt(Cache::pull($cacheKey));
         if(empty($openid)){
             return error('code 已失效',400);
         }
