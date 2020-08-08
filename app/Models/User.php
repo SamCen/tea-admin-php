@@ -39,6 +39,8 @@ class User  extends Authenticatable implements JWTSubject
     {
         if(empty($value)){
             $this->attributes['password'] = ' ';
+        }else{
+            $this->attributes['password'] = $value;
         }
     }
 
