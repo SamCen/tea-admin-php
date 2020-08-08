@@ -43,7 +43,7 @@ class AuthController extends Controller
         return success($response);
     }
 
-    public function wechatLogin(WechatLoginRequest $request)
+    public function wechatLogin(WechatLoginRequest $request,Hasher $hasher)
     {
         $code = $request->get('code');
         $wxService  = new WechatService(config('wechat.wx_appid'),config('wechat.wx_secret'));
@@ -51,11 +51,19 @@ class AuthController extends Controller
         $credentials = [
             'openid'=>$res['openid'],
         ];
-        $cacheKey = sprintf(RedisKey::USER_WXCODE_OPENID,$code);
-        Cache::put($cacheKey,encrypt($res['openid']),600);
-
-        if($token = auth('user')->attempt($credentials)){
-            $user = Auth::guard('user')->user();
+        $provider = new EloquentUserProvider($hasher, User::class);
+        $user = $provider->retrieveByCredentials($credentials);
+        if(!$user){
+            $response = [
+                'access_token' => null,
+                'code'=>encrypt($code),
+            ];
+            $cacheKey = sprintf(RedisKey::USER_WXCODE_OPENID,$code);
+            Cache::put($cacheKey,encrypt($res['openid']),600);
+        }else{
+            if (! $token = Auth::guard('user')->login($user)) {
+                return error('获取登录凭证失败', 400);
+            }
             $role = $user->role;
             $user->last_login_ip = isset($_SERVER['HTTP_X_FORWARDED_FOR'])?$_SERVER['HTTP_X_FORWARDED_FOR']:'127.0.0.1';
             $user->save();
@@ -65,19 +73,14 @@ class AuthController extends Controller
                 'token_type' => 'bearer',
                 'expires_in' => auth('user')->factory()->getTTL() * 60
             ];
-        }else{
-            $response = [
-                'access_token' => null,
-                'code'=>encrypt($code),
-            ];
         }
+
 
         return success($response);
     }
 
     public function bindUser(BindUserRequest $request,Hasher $hasher)
     {
-
         $credentials = [
             'phone'=>$request->get('phone'),
         ];
