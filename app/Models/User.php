@@ -38,9 +38,9 @@ class User  extends Authenticatable implements JWTSubject
     public function setOpenidAttribute($value)
     {
         if(empty($value)){
-            $this->attributes['password'] = ' ';
+            $this->attributes['openid'] = ' ';
         }else{
-            $this->attributes['password'] = $value;
+            $this->attributes['openid'] = $value;
         }
     }
 
