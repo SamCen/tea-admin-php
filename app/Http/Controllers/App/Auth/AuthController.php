@@ -93,7 +93,7 @@ class AuthController extends Controller
         if(!$user){
             error('没有找到手机号对应的用户');
         }
-        if (! $token = $this->guard()->login($user)) {
+        if (! $token = Auth::guard('user')->login($user)) {
             return error('绑定失败', 400);
         }
         $role = $user->role;
