@@ -103,7 +103,10 @@ class AuthController extends Controller
         $role = $user->role;
         $user->last_login_ip = isset($_SERVER['HTTP_X_FORWARDED_FOR'])?$_SERVER['HTTP_X_FORWARDED_FOR']:'127.0.0.1';
         $user->openid = $openid;
+        Log::info($user->id);
         $user->save();
+        Log::info($user->openid);
+
         $response = [
             'role'=>$role,
             'access_token' => $token,
