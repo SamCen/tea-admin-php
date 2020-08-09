@@ -12,19 +12,19 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         $table = \Illuminate\Support\Facades\DB::table('users');
-        $data = [
-            [
-                'id'=>1,
-                'username'=>'appuser',
-                'password'=>bcrypt('123456'),
-                'last_login_ip'=>ip2long('127.0.0.1'),
-                'role'=>\App\Models\User::ROLE_OPERATION,
-                'phone'=>'15902082831',
-                'created_at'=>\Carbon\Carbon::now(),
-                'updated_at'=>\Carbon\Carbon::now(),
-            ],
-        ];
-        $table->truncate();
-        $table->insert($data);
+//        $data = [
+//            [
+//                'id'=>1,
+//                'username'=>'appuser',
+//                'password'=>bcrypt('123456'),
+//                'last_login_ip'=>ip2long('127.0.0.1'),
+//                'role'=>\App\Models\User::ROLE_OPERATION,
+//                'phone'=>'15902082831',
+//                'created_at'=>\Carbon\Carbon::now(),
+//                'updated_at'=>\Carbon\Carbon::now(),
+//            ],
+//        ];
+//        $table->truncate();
+//        $table->insert($data);
     }
 }

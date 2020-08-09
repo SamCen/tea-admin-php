@@ -28,7 +28,7 @@ class UserStoreRequest extends FormRequest
         return [
             'username'=>'bail|required|string|unique:users',
             'password'=>'required|string',
-            'phone'=>['bail','required',new Phone(),'unique|users'],
+            'phone'=>['bail','required',new Phone(),'unique:users'],
             'role'=>['required','integer',Rule::in(1,2)],
         ];
     }
