@@ -124,11 +124,11 @@ class MenuTableSeeder extends Seeder
             [
                 'id'=>13,
                 'parent_id'=>12,
-                'name'=>'今日统计',
+                'name'=>'数据统计',
                 'path'=>'/statistics-today',
                 'component'=>'StatisticsToday',
                 'icon'=>null,
-                'meta'=>json_encode(['title'=>'今日统计']),
+                'meta'=>json_encode(['title'=>'数据统计']),
             ],
         ];
         $table->truncate();

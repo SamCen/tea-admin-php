@@ -27,7 +27,7 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'password'=>'nullable|string',
-            'phone'=>['bail','nullable',new Phone(),Rule::unique('users')->ignore($this->user()->id),]
+            'phone'=>['bail','nullable',new Phone(),]
         ];
     }
 }

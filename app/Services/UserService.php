@@ -16,6 +16,13 @@ class UserService
 
     public function updateUser(User $user,$params)
     {
+//        $phoneExist = User::query()
+//            ->where('id','<>',$user->id)
+//            ->where('phone',$params['phone'])
+//            ->first();
+//        if($phoneExist){
+//            return error('手机号已存在',422);
+//        }
         $user->fill($params);
         $user->save();
         return $user;
