@@ -25,9 +25,9 @@ class OperationRecordStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_id' => 'required|num',
+            'product_id' => 'required|integer|min:1',
             'action' => ['required', Rule::in('input', 'output')],
-            'num' => 'required|integer|min:1',
+            'num' => 'required|numeric',
         ];
     }
 }
