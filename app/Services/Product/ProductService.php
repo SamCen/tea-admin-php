@@ -49,7 +49,7 @@ class ProductService
         $limit = !empty($params['limit'])?$params['limit']:10;
         $query = Product::query();
         if(!empty($params['product_name'])){
-            $query->where('product_name','like',"%{$query['product_name']}%");
+            $query->where('product_name','like',"%{$params['product_name']}%");
         }
         $list = $query->with('category')->paginate($limit,['*'],'page',$page);
         return $list;
