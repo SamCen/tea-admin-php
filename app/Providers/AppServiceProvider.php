@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
@@ -28,12 +29,13 @@ class AppServiceProvider extends ServiceProvider
     {
 
         Carbon::setLocale('zh-CN');
-
-        DB::listen(function ($query) {
-            Log::info($query->sql);
-            // $query->sql
-            // $query->bindings
-            // $query->time
-        });
+        if (App::environment() != 'product') {
+            DB::listen(function ($query) {
+                Log::info($query->sql);
+                // $query->sql
+                // $query->bindings
+                // $query->time
+            });
+        }
     }
 }
