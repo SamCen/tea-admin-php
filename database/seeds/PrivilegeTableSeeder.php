@@ -119,7 +119,7 @@ class PrivilegeTableSeeder extends Seeder
 //                'type'=>'button',
 //            ],
             [
-                'code'=>'statistics',
+                'code'=>'statistics-list',
                 'parent_code'=>'statistics',
                 'name'=>'数据统计列表权限',
                 'menu_id'=>13,
