@@ -35,6 +35,7 @@ class StatisticsService
         $list->map(function($item){
             $item->input = $item->input?bcdiv($item->input,100,2):0;
             $item->output = $item->input?bcdiv($item->output,100,2):0;
+            $item->storage = bcdiv(($item->input - $item->output),1,2);
             return $item;
         });
         return $list;
