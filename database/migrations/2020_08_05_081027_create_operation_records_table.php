@@ -17,7 +17,7 @@ class CreateOperationRecordsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id')->comment('产品科目id');
             $table->string('action')->comment('行为：input 入库，output 出库。');
-            $table->unsignedInteger('num')->comment('数量');
+            $table->unsignedBigInteger('num')->comment('数量（入库*100，出库/100）');
             $table->date('operation_date')->comment('操作日期,年月日');
             $table->unsignedBigInteger('op_user_id')->comment('操作用户id');
             $table->softDeletes();
