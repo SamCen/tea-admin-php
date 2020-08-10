@@ -28,4 +28,11 @@ class CategoryUpdateRequest extends FormRequest
             'category_name'=>'nullable|string|max:10'
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'category_name'=>'分类名称',
+        ];
+    }
 }

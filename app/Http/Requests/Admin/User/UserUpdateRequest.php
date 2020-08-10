@@ -27,7 +27,18 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'password'=>'nullable|string',
-            'phone'=>['bail','nullable',new Phone(),]
+            'phone'=>['bail','nullable',new Phone(),],
+            'role'=>['nullable','integer',Rule::in(1,2)],
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+//            'username'=>'用户账号',
+            'password'=>'密码',
+            'phone'=>'手机号码',
+            'role'=>'角色',
         ];
     }
 }

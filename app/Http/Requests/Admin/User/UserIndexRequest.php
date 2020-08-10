@@ -28,4 +28,12 @@ class UserIndexRequest extends FormRequest
             'limit'=>'nullable|integer|min:1'
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'page'=>'页码',
+            'limit'=>'每页数量'
+        ];
+    }
 }

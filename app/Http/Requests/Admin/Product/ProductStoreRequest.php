@@ -24,7 +24,18 @@ class ProductStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'category_id'=>'required|integer|min:1',
+            'product_unit'=>'required|string',
+            'product_name'=>'required|string',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'category_id'=>'分类',
+            'product_unit'=>'单位',
+            'product_name'=>'产品名称'
         ];
     }
 }
