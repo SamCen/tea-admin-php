@@ -11,6 +11,7 @@ use App\Models\Menu;
 use App\Models\Privilege;
 use App\Tools\Tree;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 
@@ -178,6 +179,7 @@ class AdminController extends Controller
     {
         $roles = $request->get('roles');
         $user->roles()->sync($roles);
+        $command = Artisan::call('privileges:clear');
         return success();
     }
 

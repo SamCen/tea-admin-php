@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Tools\Tree;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Artisan;
 
 class RoleController extends Controller
 {
@@ -46,6 +47,7 @@ class RoleController extends Controller
     {
         $params = $request->all();
         Role::query()->create($params);
+        $command = Artisan::call('privileges:clear');
         return success();
     }
 
@@ -80,6 +82,7 @@ class RoleController extends Controller
          */
         $role = Role::query()->find($id);
         $role->fill($params);
+        $command = Artisan::call('privileges:clear');
         return success($params);
     }
 
@@ -100,6 +103,7 @@ class RoleController extends Controller
             return error('该角色下有账号关联');
         }
         Role::destroy($id);
+        $command = Artisan::call('privileges:clear');
         return success();
     }
 
@@ -107,6 +111,7 @@ class RoleController extends Controller
     {
         $renew = $request->get('renew');
         $role->privileges()->sync($renew);
+        $command = Artisan::call('privileges:clear');
         return success();
     }
 }
