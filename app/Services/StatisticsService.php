@@ -32,6 +32,11 @@ class StatisticsService
                 $query->where('operation_records.action', 'output')->select(DB::raw('sum(operation_records.num) as input_sum'));
             }
         ])->get();
+        $list->map(function($item){
+            $item->input = $item->input?bcdiv($item->input,100,2):0;
+            $item->output = $item->input?bcdiv($item->output,100,2):0;
+            return $item;
+        });
         return $list;
     }
 }
