@@ -134,7 +134,6 @@ class Handler extends ExceptionHandler
                     $msg = "{$app}预警\r\n请求路由：{$route}\r\n请求方法：{$method}\r\n错误码：{$exception->getCode()}\r\n文件：{$exception->getFile()}\r\n行数：{$exception->getLine()}\r\n信息：{$exception->getMessage()}";
                 }
                 Notice::wxSend($msg);
-                return error('服务器错误',500);
             }
         }
 
