@@ -97,15 +97,16 @@ class AuthController extends Controller
         if(!$user){
             return error('没有找到手机号对应的用户');
         }
+        if(!empty($user->openid)){
+            return error('该用户已绑定其他微信号了');
+        }
         if (! $token = Auth::guard('user')->login($user)) {
             return error('绑定失败', 400);
         }
         $role = $user->role;
         $user->last_login_ip = isset($_SERVER['HTTP_X_FORWARDED_FOR'])?$_SERVER['HTTP_X_FORWARDED_FOR']:'127.0.0.1';
         $user->openid = $openid;
-        Log::info($user->id);
         $user->save();
-        Log::info($user->openid);
 
         $response = [
             'role'=>$role,
