@@ -19,7 +19,7 @@ class StatisticsService
                     $query->where('operation_date','>=',$params['beginDate']);
                 }
                 if(!empty($params['endDate'])){
-                    $query->where('operation_date','<=',$params['beginDate']);
+                    $query->where('operation_date','<=',$params['endDate']);
                 }
                 $query->where('operation_records.action', 'input')->select(DB::raw('sum(operation_records.num) as input_sum'));
             }, 'records as output' => function ($query) use ($params) {
@@ -27,7 +27,7 @@ class StatisticsService
                     $query->where('operation_date','>=',$params['beginDate']);
                 }
                 if(!empty($params['endDate'])){
-                    $query->where('operation_date','<=',$params['beginDate']);
+                    $query->where('operation_date','<=',$params['endDate']);
                 }
                 $query->where('operation_records.action', 'output')->select(DB::raw('sum(operation_records.num) as input_sum'));
             }

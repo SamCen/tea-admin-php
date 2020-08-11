@@ -32,6 +32,8 @@ class AppServiceProvider extends ServiceProvider
         if (App::environment() != 'product') {
             DB::listen(function ($query) {
                 Log::info($query->sql);
+                Log::info($query->bindings);
+                Log::info($query->time);
                 // $query->sql
                 // $query->bindings
                 // $query->time
