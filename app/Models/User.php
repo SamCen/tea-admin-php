@@ -2,10 +2,7 @@
 
 namespace App\Models;
 
-use App\Exceptions\GeneralException;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User  extends Authenticatable implements JWTSubject
