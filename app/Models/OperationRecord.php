@@ -10,6 +10,7 @@ class OperationRecord extends Model
     use SoftDeletes;
     protected $fillable = ['product_id', 'action', 'num', 'operation_date', 'op_user_id'];
 
+
     /**
      * Author Cjc
      * DateTime 2020/8/10 10:08 下午
