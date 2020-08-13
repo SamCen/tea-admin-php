@@ -11,4 +11,16 @@ class Category extends Model
 
     protected $fillable = ['category_name'];
 
+
+    public function records()
+    {
+        return $this->hasManyThrough(
+            'App\Models\OperationRecord',
+            'App\Models\Product',
+            'category_id',
+            'product_id',
+            'id',
+            'id'
+        );
+    }
 }

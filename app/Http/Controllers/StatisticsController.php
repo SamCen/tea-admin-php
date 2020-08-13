@@ -13,4 +13,9 @@ class StatisticsController extends Controller
     {
         return success($statisticsService->sumStatistics($request->all()));
     }
+
+    public function categorySum(SumStatisticsRequest $request, StatisticsService $statisticsService)
+    {
+        return success($statisticsService->categorySum());
+    }
 }
