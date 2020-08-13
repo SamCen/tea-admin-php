@@ -88,6 +88,7 @@ class StatisticsService
             $item->fix_output = $item->fix_output?bcdiv($item->fix_output,100,2):0;
             $item->output = bcadd(($item->input?bcdiv($item->output,100,2):0),$item->fix_output,2);
             $item->storage = bcsub($item->input ,$item->output,2);
+            $item->product_unit = '斤';
             unset($item->fix_input,$item->fix_output,$item->input,$item->output);
             return $item;
         });
