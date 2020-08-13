@@ -16,8 +16,8 @@ class AdminTableSeeder extends Seeder
             [
                 'id'=>1,
                 'name'=>'超级管理员',
-                'account'=>'tianxiang',
-                'password'=>bcrypt('123123'),
+                'account'=>'admin',
+                'password'=>bcrypt('[][][][][][]'),
                 'last_login_ip'=>ip2long('127.0.0.1'),
                 'status'=>1,
                 'created_at'=>\Carbon\Carbon::now(),
