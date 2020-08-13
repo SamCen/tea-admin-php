@@ -15,9 +15,9 @@ class AdminTableSeeder extends Seeder
         $data = [
             [
                 'id'=>1,
-                'name'=>'admin',
-                'account'=>'admin',
-                'password'=>bcrypt('123456'),
+                'name'=>'超级管理员',
+                'account'=>'tianxiang',
+                'password'=>bcrypt('123123'),
                 'last_login_ip'=>ip2long('127.0.0.1'),
                 'status'=>1,
                 'created_at'=>\Carbon\Carbon::now(),
