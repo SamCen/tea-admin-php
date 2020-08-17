@@ -95,7 +95,8 @@ class AuthController extends Controller
         if (!$user) {
             return error('没有找到手机号对应的用户');
         }
-        if (!empty($user->openid)) {
+
+        if (!empty(trim($user->openid))) {
             return error('该用户已绑定其他微信号了');
         }
         if (!$token = Auth::guard('user')->login($user)) {
