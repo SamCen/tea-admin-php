@@ -12,4 +12,10 @@ class UserController extends Controller
     {
         return success($userService->selectList());
     }
+
+    public function getUserInfo(Request $request)
+    {
+        $user = $request->user();
+        return success(['role'=>$user->role]);
+    }
 }

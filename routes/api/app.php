@@ -16,6 +16,7 @@ Route::group(['prefix'=>'app','namespace'=>'App'],function(){
     });
     Route::group(['middleware'=>'auth:user'],function(){
         Route::post('operationRecord','Operation\OperationRecordController@store');
+        Route::get('userInfo','User\UserController@getUserInfo');
     });
     Route::get('productSelectList','Operation\OperationRecordController@productSelectList');
     Route::get('userSelectList','User\UserController@selectList');
